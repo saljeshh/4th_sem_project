@@ -1,0 +1,35 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Coins{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-md-2 g-3">
+    <div class="list-group">
+        <a href="{% url 'coins' %}" class="list-group-item list-group-item-action">All Coins</a>
+        <a href="{% url 'coinsdata' 'Mahendra' %}" class="list-group-item list-group-item-action">Mahendra</a>
+        <a href="{% url 'coinsdata' 'Birendra' %}" class="list-group-item list-group-item-action">Birendra</a>
+        <a href="{% url 'coinsdata' 'below' %}" class="list-group-item list-group-item-action">Below 50,000</a>
+        <a href="{% url 'coinsdata' 'above' %}" class="list-group-item list-group-item-action">Above 50,000</a>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="row">
+    {% for product in coins %}
+        <div class="col-md-4 col-sm-2 text-center g-3 border">
+            <a href="{% url 'product-detail' product.id %}" class="btn">
+                <div class="item">
+                    <img src="{{product.product_image.url}}" alt="" height="100">
+                </div>
+                <div class="fw-bold">{{product.title}}</div>
+                <div class="fw-bold">{{product.discounted_price}}
+                    <small class="fw-light text-decoration-line-through">{{product.selling_price}}</small>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

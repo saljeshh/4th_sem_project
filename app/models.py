@@ -6,19 +6,20 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Choices
 
 STATE_CHOICE = (
-    ('Assam','Assam'),
+    ('Biratnagar','Biratnagar'),
     ('Kathmandu','Kathmandu'),
-    ('Bihar','Bihar'),
     ('Chitwan','Chitwan'),
-    ('Chandigarh','Chandigarh'),
+    ('Bhairawa','Bhairawa'),
+    ('Jhapa','Jhapa'),
     ('Pokhara','Pokhara'),
+    ('Illam','Illam'),
+    ('Sindhuli','Sindhuli'),
+    ('Lalitpur','Lalitpur'),
 )
 
 CATEGORY_CHOICES = (
-    ('M', 'Mobile'),
-    ('L', 'Laptop'),
-    ('TW', 'Top Wear'),
-    ('BW', 'Bottom Wear'),
+    ('Banknotes', 'Banknotes'),
+    ('Coins', 'Coins'),
 )
 
 STATUS_CHOICES = (
@@ -49,7 +50,7 @@ class Product(models.Model):
     discounted_price = models.FloatField()
     description = models.TextField()
     brand = models.CharField(max_length=100)
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+    category = models.CharField(choices=CATEGORY_CHOICES, max_length=15)
     product_image = models.ImageField(upload_to="productimg")
 
     def __str__(self):

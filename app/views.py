@@ -15,10 +15,9 @@ from django.utils.decorators import method_decorator
 
 class ProductView(View):
     def get(self,request):
-        topwears = Product.objects.filter(category='TW')
-        bottomwears = Product.objects.filter(category='BW')
-        mobiles = Product.objects.filter(category='M')
-        return render(request, 'app/home.html', {'topwears':topwears, 'bottomwears':bottomwears, 'mobiles':mobiles})
+        banknotes = Product.objects.filter(category='Banknotes')
+        coins = Product.objects.filter(category='Coins')
+        return render(request, 'app/home.html', {'banknotes':banknotes, 'coins':coins})
 
 
 class ProductDetailView(View):
@@ -145,16 +144,28 @@ def orders(request):
     return render(request, 'app/orders.html',{'order_placed': op})
 
 
-def mobile(request, data=None):
+def banknotes(request, data=None):
     if data == None:
-        mobiles = Product.objects.filter(category = 'M')
-    elif data == 'Redmi' or data == 'Samsung':
-        mobiles = Product.objects.filter(category = 'M').filter(brand=data)
+        banknotes = Product.objects.filter(category = 'Banknotes')
+    elif data == 'Mahendra' or data == 'Birendra':
+        banknotes = Product.objects.filter(category = 'Banknotes').filter(brand=data)
     elif data == 'below':
-        mobiles = Product.objects.filter(category = 'M').filter(discounted_price__lt = 100000)
+        banknotes = Product.objects.filter(category = 'Banknotes').filter(discounted_price__lt = 50000)
     elif data == 'above':
-        mobiles = Product.objects.filter(category = 'M').filter(discounted_price__gt = 100000)
-    return render(request, 'app/mobile.html', {'mobiles':mobiles})
+        banknotes = Product.objects.filter(category = 'Banknotes').filter(discounted_price__gt = 50000)
+    return render(request, 'app/banknote.html', {'banknotes':banknotes})
+
+
+def coins(request, data=None):
+    if data == None:
+        coins = Product.objects.filter(category = 'Coins')
+    elif data == 'Mahendra' or data == 'Birendra':
+        coins = Product.objects.filter(category = 'Coins').filter(brand=data)
+    elif data == 'below':
+        coins = Product.objects.filter(category = 'Coins').filter(discounted_price__lt = 50000)
+    elif data == 'above':
+        coins = Product.objects.filter(category = 'Coins').filter(discounted_price__gt = 50000)
+    return render(request, 'app/coin.html', {'coins':coins})
 
 
 class CustomerRegistrationView(View):
