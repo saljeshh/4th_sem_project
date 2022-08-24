@@ -1,4 +1,3 @@
-from tkinter.tix import Tree
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -6,15 +5,13 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Choices
 
 STATE_CHOICE = (
-    ('Biratnagar','Biratnagar'),
-    ('Kathmandu','Kathmandu'),
-    ('Chitwan','Chitwan'),
-    ('Bhairawa','Bhairawa'),
-    ('Jhapa','Jhapa'),
-    ('Pokhara','Pokhara'),
-    ('Illam','Illam'),
-    ('Sindhuli','Sindhuli'),
-    ('Lalitpur','Lalitpur'),
+    ('Province No. 1','Province No. 1'),
+    ('Madhesh Province','Madhesh Province'),
+    ('Bagmati Province','Bagmati Province'),
+    ('Gandaki Province','Gandaki Province'),
+    ('Lumbini Province','Lumbini Province'),
+    ('Karnali Province','Karnali Province'),
+    ('Sudurpashchim Province','Sudurpashchim Province'),
 )
 
 CATEGORY_CHOICES = (
@@ -27,7 +24,7 @@ STATUS_CHOICES = (
     ('Packed', 'Packed'),
     ('On The Way', 'On The Way'),
     ('Delivered','Delivered'),
-    ('Cancel','Cancel'),
+    ('Cancelled','Cancelled'),
 )
 
 # Create your models here.
@@ -37,7 +34,6 @@ class Customer(models.Model):
     name = models.CharField(max_length=200)
     locality = models.CharField(max_length=200)
     city = models.CharField(max_length=50)
-    zipcode = models.IntegerField()
     state = models.CharField(choices=STATE_CHOICE, max_length=50)
 
     def __str__(self):
