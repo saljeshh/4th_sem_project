@@ -178,7 +178,9 @@ class CustomerRegistrationView(View):
         if form.is_valid():
             messages.success(request,'Congratulations!! Registered Successfully')
             form.save()
-        return render(request, 'app/customerregistration.html', {'form':form})
+        #return render(request, 'app/customerregistration.html', {'form':form})
+        return redirect("login")
+
 
 @login_required
 def checkout(request):
@@ -221,8 +223,8 @@ class ProfileView(View):
             locality = form.cleaned_data['locality']
             city = form.cleaned_data['city']
             state = form.cleaned_data['state']
-            zipcode = form.cleaned_data['zipcode']
-            reg = Customer(user=usr, name=name,locality=locality,city=city,state=state,zipcode=zipcode)
+            reg = Customer(user=usr, name=name,locality=locality,city=city,state=state)
             reg.save()
             messages.success(request,'Profile Updated')
+            return redirect("profile")
         return render(request,'app/profile.html',{'form':form,'active':'btn-primary'})

@@ -20,7 +20,7 @@
 
     <title>Numismatic | {% block title %} {% endblock title %} </title>
   </head>
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top py-1">
      <div class="container">
        <a class="navbar-brand pr-5" href="/"><img src="{% static 'app/images/banner/logo.png' %}" alt="LOGO"></a>
@@ -55,7 +55,7 @@
               </ul>
             </li>   
             <li class="nav-item mx-2">
-             <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-danger">4</span> Cart </a>
+             <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-danger">-</span> Cart </a>
             </li>
           {% else %}
             <li class="nav-item mx-2">
@@ -75,7 +75,7 @@
     {% block main-content %} {% endblock main-content %}
 
     <!-- Start Footer -->
-    <footer class="container-fluid bg-dark text-center p-2 mt-5">
+    <footer class=" bg-dark text-center py-4 mt-auto">
         <small class="text-white">Copyright &copy; 2022 || Numismatic Collectables || </small>
     </footer> <!-- End Footer -->
 
