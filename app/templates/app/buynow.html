@@ -1,6 +1,51 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block title %}Buy Now{% endblock title %}
+{% block title %}Buy Item{% endblock title %}
 {% block main-content %}
-Product Buy Now
+<div class="container">
+ <div class="row mt-5">
+  <div class="col-sm-6">
+    <h4>Order Summary</h4>
+    <hr>
+
+      <div class="card mb-2">
+        <div class="card-body">
+          <h5>Product: {{title}}</h5>
+          <p>Quantity: 1</p>
+          <p class="fw-bold">Price: {{total}} </p>
+        </div>
+      </div>
+
+     <p class="fw-bold">Total Cost + Shipping: {{totalamount}}</p>
+    <small>Term and Condition: Please confirm your order first before proceeding, if you cancel your order after its packed and shipped you will be taken legal actions.</small>
+  </div>
+  <div class="col-sm-4 offset-sm-1">
+    <h4>Select Shipping Address</h4>
+    <hr>
+    <form action="/paymentdone">
+    {% for ad in add %}
+      <div class="card">
+        <div class="card-body">
+        <h5>{{ad.name}}</h5>
+        <p>{{ad.locality}}, {{ad.city}}, {{ad.state}}</p>
+        </div>
+      </div>
+        <div class="form-check mt-2 mb-5">
+          <input class="form-check-input" type="radio" value="{{ ad.id }}" name="custid" id="custadd{{forloop.counter}}">
+          <label class="form-check-label fw-bold" for="">
+            Address: {{forloop.counter}}</label>
+        </div>
+    {% endfor %}
+         <div class="card">
+        <div class="card-body">
+          <h5>CASH ON DELIVERY !!!!!</h5>
+        </div>
+      </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock main-content %}

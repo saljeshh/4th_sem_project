@@ -1,3 +1,4 @@
+from turtle import title
 from unicodedata import category
 from urllib import request
 from django.http import JsonResponse
@@ -10,7 +11,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
+from django.shortcuts import get_object_or_404
 
 class ProductView(View):
     def get(self, request):
@@ -28,18 +29,21 @@ class ProductDetailView(View):
         return render(request, 'app/productdetail.html',
                       {'product': product, 'item_already_in_cart': item_already_in_cart})
 
-
 @login_required
-class BuyNow(View):
-    def get(self, request, pk):
-        product = Product.objects.get(pk=pk)
+def BuyNow(request,id):
+    user = request.user
+    address = Customer.objects.filter(user=user)
+    shipping_amount = 70
+    prod_id = request.GET['prod_id']
+    product = Product.objects.get(prod_id == id)
+
+    title = product.title
+    price = product.discounted_price
 
 
-        title = Product[prod_id].title
-        shipping_amount = 70.0
-        totalamount = price + shipping_amount
+    total = price + shipping_amount
 
-        return render(request, 'app/buynow.html', {'add': add, 'price': price, 'title': title, 'totalamount': totalamount})
+    return render(request, 'app/buynow.html', {'add': address,'title': title, 'total':total})
 
 
 @login_required
