@@ -1,6 +1,3 @@
-from itertools import product
-from unicodedata import category
-from urllib import request
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
@@ -130,9 +127,7 @@ def remove_cart(request):
 
         return JsonResponse(data)
 
-@login_required
-def buy_now(request):
- return render(request, 'app/buynow.html')
+
 
 @login_required
 def address(request):
@@ -179,8 +174,7 @@ class CustomerRegistrationView(View):
         if form.is_valid():
             messages.success(request,'Congratulations!! Registered Successfully')
             form.save()
-        #return render(request, 'app/customerregistration.html', {'form':form})
-        return redirect("login")
+        return render(request, 'app/customerregistration.html', {'form':form})
 
 
 @login_required
